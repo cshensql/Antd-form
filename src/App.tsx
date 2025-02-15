@@ -35,7 +35,7 @@ function App() {
 
   return (
     <section className="container m-4 p-4 max-w-[400px]">
-      <div className="flex flex-row justify-between items-center text-xl font-medium my-4">
+      <div className="flex flex-row justify-between items-center my-4">
         <p>Editable</p>
         <Switch
           value={switchState}
@@ -55,7 +55,7 @@ function App() {
           <Input placeholder="First Name" onChange={handleTextChange} />
         </Form.Item>
 
-        <p>Are you proficient in ReactJS development?</p>
+        <h2>Are you proficient in ReactJS development?</h2>
         <Form.Item
           name="radioValue"
           rules={[{ required: true, message: "Please choose one option!" }]}
@@ -71,7 +71,7 @@ function App() {
         </Form.Item>
 
         <div>
-          <p>Which tools do you use?</p>
+          <h2>Which tools do you use?</h2>
           <p>Please select all that apply.</p>
         </div>
         <Form.Item name="checkedTools">
