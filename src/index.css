@@ -24,3 +24,7 @@ body {
 .ant-checkbox .ant-checkbox-inner {
   @apply rounded-full;
 }
+
+.ant-btn {
+  @apply rounded-full;
+}
