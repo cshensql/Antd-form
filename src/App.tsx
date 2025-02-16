@@ -1,4 +1,4 @@
-import "./index.css";
+import "./App.css";
 import {
   Button,
   Checkbox,
@@ -12,47 +12,57 @@ import data from "./data";
 import { useState } from "react";
 
 function App() {
+  const [firstName, setFirstName] = useState(data.firstName);
+  const [focus, setFocus] = useState(false);
   const [switchState, setSwitchState] = useState(data.switchState);
-  const toolsOptions = ["Redux", "Lodash", "Ant Design", "Webpack", "Other"];
 
+  const toolsOptions = ["Redux", "Lodash", "Ant Design", "Webpack", "Other"];
+  const labelClass =
+    focus || (firstName && firstName.length !== 0)
+      ? "label label-float"
+      : "label";
+
+  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    data.firstName = e.target.value;
+    setFirstName(e.target.value);
+  };
   const handleRadioChange = (e: RadioChangeEvent) => {
     data.radioValue = e.target.value;
   };
   const handlecCheckboxChange = (checkedTools: string[]) => {
     data.checkedTools = checkedTools;
   };
-
-  const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    data.firstName = e.target.value;
-  };
   const onFinish = () => {
     console.log("Current state:", data);
   };
-
-  // const onFinishFailed = (errorInfo: ValidateErrorEntity<FieldType>) => {
-  //   console.log("error:", errorInfo);
-  // };
-
   return (
     <section className="container m-4 p-4 max-w-[400px]">
-      <div className="flex flex-row justify-between items-center my-4">
+      <div className="flex flex-row justify-between items-center mb-6">
         <p>Editable</p>
         <Switch
-          value={switchState}
+          checked={switchState}
           onChange={(checked) => setSwitchState(checked)}
         />
       </div>
       <Form
-        className="flex flex-col gap-y-4"
+        className="flex flex-col"
         onFinish={onFinish}
-        // onFinishFailed={onFinishFailed}
+        initialValues={{
+          checkedTools: data.checkedTools,
+        }}
         disabled={!switchState}
       >
         <Form.Item
           name="firstName"
-          rules={[{ required: true, message: "Please input your first name!" }]}
+          rules={[{ required: true, message: "Please enter your first name!" }]}
         >
-          <Input placeholder="First Name" onChange={handleTextChange} />
+          <div onBlur={() => setFocus(false)} onFocus={() => setFocus(true)}>
+            <Input
+              value={switchState ? firstName : ""}
+              onChange={handleTextChange}
+            />
+            {switchState && <label className={labelClass}>First Name</label>}
+          </div>
         </Form.Item>
 
         <h2>Are you proficient in ReactJS development?</h2>
@@ -78,14 +88,12 @@ function App() {
           <Checkbox.Group
             className="!flex flex-col"
             options={toolsOptions}
-            defaultValue={data.checkedTools}
             onChange={handlecCheckboxChange}
           />
         </Form.Item>
         <Form.Item className="flex justify-center *:w-[70%]">
           <Button
             type="primary"
-            color="purple"
             htmlType="submit"
             disabled={!switchState}
             block

@@ -1,1 +1,78 @@
 @import "tailwindcss";
+
+/* Switch styles when ON and OFF */
+.ant-switch {
+  @apply p-0.5;
+}
+.ant-switch-handle::before {
+  @apply m-[0.15rem];
+}
+.ant-switch-checked {
+  @apply !bg-[var(--primary-color)];
+}
+.ant-switch .ant-switch-inner {
+  @apply bg-white;
+}
+.ant-switch-checked .ant-switch-inner {
+  @apply bg-[var(--primary-color)];
+}
+.ant-switch:not(.ant-switch-checked) .ant-switch-handle::before {
+  @apply bg-[var(--primary-color)];
+}
+
+/* Checkbox and Radio: change the default shape & size, and set the border color. */
+.ant-checkbox .ant-checkbox-inner,
+.ant-radio .ant-radio-inner {
+  @apply rounded-full w-3 h-3;
+}
+.ant-checkbox:not(.ant-checkbox-disabled) .ant-checkbox-inner,
+.ant-radio:not(.ant-radio-disabled) .ant-radio-inner {
+  @apply !border-[var(--primary-color)];
+}
+.ant-checkbox-disabled:not(.ant-checkbox-checked) .ant-checkbox-inner,
+.ant-radio-disabled:not(.ant-radio-checked) .ant-radio-inner {
+  @apply bg-transparent;
+}
+
+/* Disable the default filled pattern */
+.ant-checkbox-checked .ant-checkbox-inner::after,
+.ant-radio-checked .ant-radio-inner::after {
+  @apply !hidden;
+}
+/* When checked, change the default bg color */
+.ant-checkbox-checked:not(.ant-checkbox-disabled) .ant-checkbox-inner,
+.ant-radio-checked:not(.ant-radio-disabled) .ant-radio-inner {
+  @apply !bg-[var(--primary-color)];
+}
+
+.ant-btn {
+  @apply rounded-full bg-[var(--primary-color)] !text-white;
+}
+.ant-btn:disabled {
+  @apply bg-[var(--secondary-color)];
+}
+
+.ant-input {
+  @apply pt-[0.7rem] pl-2.5;
+}
+.ant-input:hover,
+.ant-input:focus {
+  @apply !border-[var(--primary-color)];
+}
+.ant-input:disabled {
+  @apply bg-transparent;
+}
+
+.label {
+  font-weight: lighter;
+  position: absolute;
+  pointer-events: none;
+  left: 0.625rem;
+  top: 0.5rem;
+  transition: 0.2s ease all;
+}
+
+.label-float {
+  top: 0.2rem;
+  font-size: 0.5rem;
+}

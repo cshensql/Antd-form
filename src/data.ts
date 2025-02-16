@@ -1,16 +1,11 @@
-// interface data {
-//     switchState: boolean,
-//     firstName: string,
-//     radioValue: boolean,
-//     checkedTools: string[],
-// }
-
-const data: {
+interface Data {
   switchState: boolean;
   firstName: string;
   radioValue: boolean;
   checkedTools: string[];
-} = {
+}
+
+const data: Data = {
   switchState: true,
   firstName: "",
   radioValue: false,
